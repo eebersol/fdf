@@ -13,7 +13,11 @@
 #Define the program
 NAME		=	fdf
 LIB			=	./libft/libft.a
-_SRC		=	
+LIBX 		= -lm -I/usr/X11/include -L/usr/X11/lib -lX11 -lXext -lmlx
+_SRC		=	main.c\
+				parse_map.c\
+				init.c\
+				print_map\
 
 INC			=	./includes/fdf.h \
 
@@ -27,7 +31,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(INC)
 	@make -C ./libft/
-	@gcc $(CFLAGS)  -lm -L libft/ -lft -lmlx -framework OpenGL -framework AppKit $(OBJ) $(LIB) $(INCLUDES) -o $(NAME)
+	@gcc $(CFLAGS)  -lm -L libft/ $(LIBX)  $(OBJ) $(LIB) $(INCLUDES) -o $(NAME)
 	@echo $(NAME) " - compiled"
 
 %.o: %.c
@@ -46,12 +50,3 @@ fclean: clean
 re: fclean all
 
 .PHONY: all, clean, fclean, re
-
-
-
-
-
-
-
-
-		$(CC) -o $(NAME) $(OBJ)

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eebersol <eebersol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,17 +12,34 @@
 
 #include <fdf.h>
 
-int main(int ac, char **av)
+t_env		*recover_env(void)
 {
-	(void)ac;
-	(void)av;
-	// if (ac == 2)
-	// {
-	// 	init_env();
-	// 	parse_map(av[1]);
-	// 	return (0);
-	// }
-	// else
-	// 	ft_putendl_fd("Invalid number of argument", 2);
-	print_map();
+	static t_env	env;
+
+	return (&env);
+}
+
+void		init_env(void)
+{
+	t_env		*env;
+
+	env = recover_env();
+	env->winsize = 0;
+	env->grille_value = NULL;
+	env->list = NULL;
+	env->point = init_point();
+}
+
+
+t_point		*init_point(void)
+{
+	t_point *point;
+
+	point = (t_point*)malloc(sizeof(t_point));
+	point->x = 0;
+	point->y = 0;
+	point->z = 0;
+	point->s = 0;
+	point->z_color = 0;
+	return (point);
 }
