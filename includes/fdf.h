@@ -31,17 +31,15 @@ typedef struct s_point
 	int 		z_color;
 }				t_point;
 
-typedef struct s_data
-{
-    MLXCore    *mlx_ptr;
-    MLXWindow  *mlx_win;
-} 				data_t;
-
-
 typedef struct		s_env
 {
-	int 			winsize;
-	int 			**grille_value;
+	double 			theight;
+	double 			twidth;
+	double			x_size;
+	double			y_size;
+	double 			**grille_value;
+	double 			height;
+	double 			width;
 	t_list 			*list;
 	t_point 		*point;
 }					t_env;
@@ -49,7 +47,7 @@ typedef struct		s_env
 // parse_map
 */
 void		parse_map(char *map);
-int	 **put_value_array(void);
+void 	put_value_tolist(void);
 void 	get_mapinfo(int fd);
 /*
 // init
@@ -57,8 +55,8 @@ void 	get_mapinfo(int fd);
 t_env		*recover_env(void);
 void		init_env(void);
 t_point		*init_point(void);
-
-int			print_map(void);
-void 		do_key_press(MLXWindow *win, data_t *data, unsigned key);
+void	print_line_hori(double x1, double y1, double x2, double y2, void *mlx, void *win);
+void	print_verti(double x1, double y1, double x2, double y2, void *mlx, void *win);
+void			print_map(void);
 
 #endif

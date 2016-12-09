@@ -12,83 +12,59 @@
 
 #include <fdf.h>
 
-// print_line_hori((2 * y + x) / 2, (2 * y - x) / 2, (2 * y1 + x1) / 2, (2 * y - x) / 2, mlx, win);
-// print_verti((2 * y + x) / 2, (2 * y - x) / 2, (2 * y + x) / 2, (2 * y1 - x1) / 2, mlx, win);
 static void free_node(void *elem, size_t size)
 {
-	(void)size;
-
 	if (elem)
+	{
 		free(elem);
+	}
 }
 
 static void ft_lstshow(t_list *list)
 {
-
-	while (list)
+	while (list && list->next)
 	{
 		printf("[%s]\n", (char *)list->content);
-		if (!list->next)
-			return ;
 		list = list->next;
 	}
 }
 
-// static void ft_lstshow_coord(t_list *list)
-// {
-// 	t_point *point;
-
-// 	while (list && list->next)
-// 	{
-// 		point = list->content;
-// 		printf("s : [%f]\n", point->s);
-// 		printf("x [%f]\n", point->x);
-// 		printf("y [%f\n", point->y);
-// 		list = list->next;
-// 	}
-// }
 void 	put_value_tolist(void)
 {
 	t_env 	*env;
 	t_list 	*list;
-	t_list 	*cur;
 	t_point *point;
 	char 	**line;
 	int 	i;
-	int 	j;
+	int 	x;
 
-	env = recover_env();
 	list = env->list;
-	cur = (t_list*)malloc(sizeof(t_list));
-	env->twidth = ft_count_raw_aoc(ft_strsplit((char*)list->content, ' '));
-	env->theight = ft_lstcount(env->list);
-	j = 0;
+	ft_lstdel(&env->list, &free_node);
+	env->twidth = ft_strlen((char*)list->content);
+	env->theight = ft_lstcount(list)/env->twidth;
 	if (list)
 	{
+		x = 0;
 		while (list)
 		{
 			point = init_point();
+			env->list->content = point
 			line = ft_strsplit((char*)list->content, ' ');
 			i = 0;
-			while (i < ft_count_raw_aoc(line))
+			while (line[i])
 			{
 				point->s = ft_atoi(line[i]);
 				point->x = env->height/env->theight;
 				point->y = env->width/env->twidth;
-				point->x = point->x * i;
-				point->y = point->y * j;
-				ft_lstaddend(&cur, ft_lstnew(point, sizeof(t_point)));
+				ft_lstaddend(&env->list, ft_lstnew(point, sizeof(t_point)));
 				i++;
 			}
-			j++;
+			if (!list->next)
+				break;
 			list = list->next;
+
 		}
-		env->x_size = i;
-		env->y_size = j;
-		printf("[%f][%f]\n",env->x_size, env->y_size);
 	}
-	ft_lstdel(&env->list, &free_node);
-	env->list = cur;
 }
 
 void 	get_mapinfo(int fd) 
@@ -118,6 +94,6 @@ void	parse_map(char *map)
 	else
 	{
 		get_mapinfo(fd);
-		put_value_tolist();
+		put_value_t_list();
 	}
 }

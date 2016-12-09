@@ -14,81 +14,53 @@
 
 // print_line_hori((2 * y + x) / 2, (2 * y - x) / 2, (2 * y1 + x1) / 2, (2 * y - x) / 2, mlx, win);
 // print_verti((2 * y + x) / 2, (2 * y - x) / 2, (2 * y + x) / 2, (2 * y1 - x1) / 2, mlx, win);
-static void free_node(void *elem, size_t size)
-{
-	(void)size;
-
-	if (elem)
-		free(elem);
-}
-
 static void ft_lstshow(t_list *list)
 {
-
-	while (list)
+	while (list && list->next)
 	{
 		printf("[%s]\n", (char *)list->content);
-		if (!list->next)
-			return ;
 		list = list->next;
 	}
 }
 
-// static void ft_lstshow_coord(t_list *list)
-// {
-// 	t_point *point;
-
-// 	while (list && list->next)
-// 	{
-// 		point = list->content;
-// 		printf("s : [%f]\n", point->s);
-// 		printf("x [%f]\n", point->x);
-// 		printf("y [%f\n", point->y);
-// 		list = list->next;
-// 	}
-// }
-void 	put_value_tolist(void)
+int	 **put_value_array(void)
 {
-	t_env 	*env;
 	t_list 	*list;
-	t_list 	*cur;
 	t_point *point;
+	int 	**array;
 	char 	**line;
 	int 	i;
-	int 	j;
+	int 	x;
 
-	env = recover_env();
-	list = env->list;
-	cur = (t_list*)malloc(sizeof(t_list));
-	env->twidth = ft_count_raw_aoc(ft_strsplit((char*)list->content, ' '));
-	env->theight = ft_lstcount(env->list);
-	j = 0;
+	list = recover_env()->list;
+	array = NULL;
 	if (list)
 	{
+		array = (int**)malloc(sizeof(int*) * (ft_lstcount(list) + 1));
+		printf("[%d]\n", ft_lstcount(list));
+		x = 0;
 		while (list)
 		{
-			point = init_point();
 			line = ft_strsplit((char*)list->content, ' ');
+			array[x] = (int*)malloc(sizeof(int) * (ft_count_raw_aoc(line) + 1));
 			i = 0;
-			while (i < ft_count_raw_aoc(line))
+			while (line[i])
 			{
-				point->s = ft_atoi(line[i]);
-				point->x = env->height/env->theight;
-				point->y = env->width/env->twidth;
-				point->x = point->x * i;
-				point->y = point->y * j;
-				ft_lstaddend(&cur, ft_lstnew(point, sizeof(t_point)));
+				array[x][i] = ft_atoi(line[i]);
 				i++;
 			}
-			j++;
+			array[x][i] = '\0';
+			x++;
+			if (!list->next)
+				break;
 			list = list->next;
+
 		}
-		env->x_size = i;
-		env->y_size = j;
-		printf("[%f][%f]\n",env->x_size, env->y_size);
+		ft_print_aoi(array, x, ft_count_raw_aoi(array));
+		recover_env()->winwidth = i;
+		recover_env()->winheight = ft_count_raw_aoi(array);
 	}
-	ft_lstdel(&env->list, &free_node);
-	env->list = cur;
+	return (array);
 }
 
 void 	get_mapinfo(int fd) 
@@ -118,6 +90,6 @@ void	parse_map(char *map)
 	else
 	{
 		get_mapinfo(fd);
-		put_value_tolist();
+		array = put_value_array();
 	}
 }

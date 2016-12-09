@@ -24,10 +24,15 @@ void		init_env(void)
 	t_env		*env;
 
 	env = recover_env();
-	env->winsize = 0;
+	env->point = init_point();
 	env->grille_value = NULL;
 	env->list = NULL;
-	env->point = init_point();
+	env->height = 2000;
+	env->width = 1000;
+	env->twidth = 0;
+	env->x_size = 0;
+	env->y_size = 0;
+	env->theight = 0;
 }
 
 

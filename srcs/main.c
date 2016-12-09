@@ -16,13 +16,14 @@ int main(int ac, char **av)
 {
 	(void)ac;
 	(void)av;
-	// if (ac == 2)
-	// {
-	// 	init_env();
-	// 	parse_map(av[1]);
-	// 	return (0);
-	// }
-	// else
-	// 	ft_putendl_fd("Invalid number of argument", 2);
-	print_map();
+	if (ac == 2)
+	{
+		init_env();
+		printf("1 [%f]\n", recover_env()->height);
+		parse_map(av[1]);
+		print_map();
+		return (0);
+	}
+	else
+		ft_putendl_fd("Invalid number of argument", 2);
 }
