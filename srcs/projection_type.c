@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   projection_type.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eebersol <eebersol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,17 +12,27 @@
 
 #include <fdf.h>
 
-int main(int ac, char **av)
+void  cartesian_to_isometric(void)
 {
-	(void)ac;
-	(void)av;
-	if (ac == 2)
+	t_point *point;
+	t_list *cur;
+	t_point	*iso_point;
+	t_env *env;
+
+	env = recover_env();
+	cur = (t_list*)malloc(sizeof(t_list));
+	while (env->list)
 	{
-		init_env();
-		parse_map(av[1]);
-		print_map();
-		return (0);
+		point = env->list->content;
+		iso_point = init_point();
+		// iso_point->x = (point->x - point->y) * (env->twidth/2);
+		iso_point->x = (2 * point->y - point->x)/2;
+		// iso_point->y = (point->x + point->y) * (env->theight/2);
+		iso_point->y = (2 * point->y + point->x)/2;
+		ft_lstaddend(&cur, ft_lstnew(iso_point, sizeof(t_point)));
+		if (!env->list->next)
+			break;
+		env->list = env->list->next;
 	}
-	else
-		ft_putendl_fd("Invalid number of argument", 2);
+	env->list = cur;
 }

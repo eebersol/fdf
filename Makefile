@@ -17,6 +17,7 @@ _SRC		=	main.c\
 				parse_map.c\
 				init.c\
 				print_map.c\
+				projection_type.c\
 
 INC			=	./includes/fdf.h \
 

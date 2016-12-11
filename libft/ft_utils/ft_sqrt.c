@@ -1,7 +1,8 @@
+
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_sqrt.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eebersol <eebersol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,19 +11,21 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fdf.h>
+#include "../libft.h"
 
-int main(int ac, char **av)
+double	ft_sqrt(double nb)
 {
-	(void)ac;
-	(void)av;
-	if (ac == 2)
-	{
-		init_env();
-		parse_map(av[1]);
-		print_map();
-		return (0);
-	}
+	unsigned int i;
+	unsigned int sq;
+
+	i = 1;
+	sq = 1;
+	if((unsigned int)nb == 0)
+		return(0);
+	while (i * i < (unsigned int)nb)
+		i++;
+	if (((unsigned int)nb % i) == 0)
+		return (i);
 	else
-		ft_putendl_fd("Invalid number of argument", 2);
+		return(0);
 }

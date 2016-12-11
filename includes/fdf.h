@@ -37,9 +37,11 @@ typedef struct		s_env
 	double 			twidth;
 	double			x_size;
 	double			y_size;
+	double 			len_map;
 	double 			**grille_value;
 	double 			height;
 	double 			width;
+	char 			type;
 	t_list 			*list;
 	t_point 		*point;
 }					t_env;
@@ -55,8 +57,13 @@ void 	get_mapinfo(int fd);
 t_env		*recover_env(void);
 void		init_env(void);
 t_point		*init_point(void);
-void	print_line_hori(double x1, double y1, double x2, double y2, void *mlx, void *win);
-void	print_verti(double x1, double y1, double x2, double y2, void *mlx, void *win);
-void			print_map(void);
+void		print_line_hori(double x1, double y1, double x2, double y2, void *mlx, void *win);
+void		print_verti(double x1, double y1, double x2, double y2, void *mlx, void *win);
+void		print_map(void);
+
+/*
+// Iso projection
+*/
+void	 cartesian_to_isometric(void);
 
 #endif

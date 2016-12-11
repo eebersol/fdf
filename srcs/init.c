@@ -27,8 +27,9 @@ void		init_env(void)
 	env->point = init_point();
 	env->grille_value = NULL;
 	env->list = NULL;
-	env->height = 2000;
-	env->width = 1000;
+	env->height = 1200;
+	env->width = 1200;
+	env->type = 'I';
 	env->twidth = 0;
 	env->x_size = 0;
 	env->y_size = 0;
