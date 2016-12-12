@@ -45,13 +45,15 @@ static void ft_lstshow(t_list *list)
 // 		list = list->next;
 // 	}
 // }
+
 static void new_size()
 {
 	t_env *env;
 
 	env = recover_env();
-	env->len_map = env->height - (env->height * 0.6);
-	env->len_map /= 2;
+	env->len_map = env->height - (env->height * 0.82);
+	printf("[%f]\n", + (env->len_map));
+	// env->len_map = env->len_map;
 }
 void 	put_value_tolist(void)
 {
@@ -59,6 +61,7 @@ void 	put_value_tolist(void)
 	t_list 	*list;
 	t_list 	*cur;
 	t_point *point;
+	double 	tmp;
 	char 	**line;
 	int 	i;
 	int 	j;
@@ -80,25 +83,26 @@ void 	put_value_tolist(void)
 			{
 				point = init_point();
 				point->z = ft_atoi(line[i]);
-				point->x = (i * (env->twidth * 0.6)) - 150;
-				point->y = (j * ((env->theight * 0.6))) + env->len_map * 1.1;
+				point->x = i * (env->twidth * 0.82) - (env->len_map * 2);
+				point->y = j * (env->theight * 0.41) + (env->len_map * 2);
+				tmp = point->x;
+				point->x = (2 * point->y - point->x)/2;
+				point->y = (2 * point->y + tmp)/2;
 				ft_lstaddend(&cur, ft_lstnew(point, sizeof(t_point)));
 				i++;
 			}
-			j++;
 			if (!list->next)
 			{
-				printf("x [%f]\n", env->height - point->x);
 				break;
 			}
 			list = list->next;
+			j++;
 		}
+		printf("MAX[%f][%f]\n", point->x, point->y);
 		env->x_size = i;
 		env->y_size = j;
 	}
 	env->list = cur;
-	// if (env->type == 'I')
-	// 	cartesian_to_isometric();
 }
 
 void 	get_mapinfo(int fd) 

@@ -24,15 +24,16 @@ void  cartesian_to_isometric(void)
 	while (env->list)
 	{
 		point = env->list->content;
+		printf("Avant Iso : x [%f] y [%f]\n", point->x, point->y);
 		iso_point = init_point();
-		// iso_point->x = (point->x - point->y) * (env->twidth/2);
+		// iso_point->x = (point->x - point->y) * ((env->twidth * 0.8)/2);
 		iso_point->x = (2 * point->y - point->x)/2;
-		// iso_point->y = (point->x + point->y) * (env->theight/2);
+		// iso_point->y = (point->x + point->y) * ((env->theight*0.8)/2);
 		iso_point->y = (2 * point->y + point->x)/2;
 		ft_lstaddend(&cur, ft_lstnew(iso_point, sizeof(t_point)));
 		if (!env->list->next)
 			break;
 		env->list = env->list->next;
 	}
-	env->list = cur;
+	// env->list = cur;
 }
