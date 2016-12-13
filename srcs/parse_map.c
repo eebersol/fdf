@@ -51,9 +51,9 @@ static void new_size()
 	t_env *env;
 
 	env = recover_env();
-	env->len_map = env->height - (env->height * 0.82);
-	printf("[%f]\n", + (env->len_map));
-	// env->len_map = env->len_map;
+	printf("[%f][%f]\n", env->height, env->width);
+	env->len_map = sqrt(((env->width/2)*(env->width/2)) + ((env->width/2)*(env->width/2)));
+	env->len_map /= 2;
 }
 void 	put_value_tolist(void)
 {
@@ -70,8 +70,9 @@ void 	put_value_tolist(void)
 	list = env->list;
 	cur = (t_list*)malloc(sizeof(t_list));
 	new_size();
-	env->twidth = (env->width)/(ft_count_raw_aoc(ft_strsplit((char*)list->content, ' ')));
-	env->theight = (env->height)/(ft_lstcount(env->list));
+	env->twidth = (env->width/1.5)/(ft_count_raw_aoc(ft_strsplit((char*)list->content, ' ')));
+	env->theight = (env->height/1.5)/(ft_lstcount(env->list));
+	env->theight = env->twidth;
 	j = 0;
 	if (list)
 	{
@@ -83,11 +84,16 @@ void 	put_value_tolist(void)
 			{
 				point = init_point();
 				point->z = ft_atoi(line[i]);
-				point->x = i * (env->twidth * 0.82) - (env->len_map * 2);
-				point->y = j * (env->theight * 0.41) + (env->len_map * 2);
-				tmp = point->x;
-				point->x = (2 * point->y - point->x)/2;
-				point->y = (2 * point->y + tmp)/2;
+				point->x = i * (env->twidth/2) + 250;
+				point->y = j * (env->theight) + 50;
+				printf("1 Add [%f][%f]\n", point->y, point->x);
+				tmp = point->y;
+				// printf("tmp : [%f]\n", tmp);
+				// point->y = (2 * point->y + point->x)/2;
+				// point->x = (2 * tmp - point->x)/2;
+				if (i == 0 & j == 0)
+					env->x_size = point->y;
+				// printf("2 : Add [%f][%f]\n", point->y, point->x);
 				ft_lstaddend(&cur, ft_lstnew(point, sizeof(t_point)));
 				i++;
 			}
@@ -98,9 +104,8 @@ void 	put_value_tolist(void)
 			list = list->next;
 			j++;
 		}
-		printf("MAX[%f][%f]\n", point->x, point->y);
-		env->x_size = i;
-		env->y_size = j;
+		env->x_size = i + 1;
+		env->y_size = j + 1;
 	}
 	env->list = cur;
 }
