@@ -78,7 +78,7 @@ FT_STR_SRC			=	$(addprefix ft_str/,$(_FT_STR_SRC))
 _FT_UTILS_SRC		=	ft_atoi.c ft_itoa.c ft_bzero.c ft_toupper.c ft_tolower.c\
 						ft_nbrlen.c ft_nbrlen_base.c ft_wordlen.c ft_wordcount.c\
 						ft_itoa_base.c ft_get_next_line.c ft_colors.c \
-						ft_console.c ft_match.c ft_nmatch.c ft_sqrt.c
+						ft_console.c ft_match.c ft_nmatch.c ft_sqrt.c ft_positive.c
 
 FT_UTILS_SRC		=	$(addprefix ft_utils/,$(_FT_UTILS_SRC))
 

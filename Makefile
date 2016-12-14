@@ -14,10 +14,9 @@
 NAME		=	fdf
 LIB			=	./libft/libft.a
 _SRC		=	main.c\
-				parse_map.c\
+				get_info.c\
+				display.c\
 				init.c\
-				print_map.c\
-				projection_type.c\
 
 INC			=	./includes/fdf.h \
 
@@ -31,7 +30,7 @@ all: $(NAME)
 
 $(NAME): $(OBJ) $(INC)
 	@make -C ./libft/
-	@gcc $(CFLAGS)  -lm -L libft/ -lm -L libft/ -lft -lmlx -framework OpenGL -framework AppKit  $(OBJ) $(LIB) $(INCLUDES) -o $(NAME)
+	@gcc $(CFLAGS)  -lm -L libft/ -lft -L./minilibx -lmlx -framework OpenGL -framework AppKit  $(OBJ) $(LIB) $(INCLUDES) -o $(NAME)
 	@echo $(NAME) " - compiled"
 
 %.o: %.c

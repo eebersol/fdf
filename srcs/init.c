@@ -19,33 +19,46 @@ t_env		*recover_env(void)
 	return (&env);
 }
 
+t_mlx		*recover_mlx(void)
+{
+	static 	t_mlx 	mlx;
+
+	return (&mlx);
+}
+
 void		init_env(void)
 {
 	t_env		*env;
 
+	env = (t_env*)malloc(sizeof(t_env));
 	env = recover_env();
-	env->point = init_point();
-	env->grille_value = NULL;
+	env->coord = NULL;
+	env->height_tile = NULL;
+	env->height = 0;
+	env->width = 0;
+	env->depth = 4;
+	env->view.x = 20;
+	env->view.y = 10;
+	env->fd = 0;
 	env->list = NULL;
-	env->height = 1200;
-	env->width = 1200;
-	env->type = 'I';
-	env->twidth = 0;
-	env->x_size = 0;
-	env->y_size = 0;
-	env->theight = 0;
 }
 
 
-t_point		*init_point(void)
+void	init_delta(t_delta *delta, t_point start, t_point end)
 {
-	t_point *point;
+	delta->x = end.x - start.x;
+	delta->y = end.y - start.y;
+	delta->abs_x = ft_positive(delta->x);
+	delta->abs_y = ft_positive(delta->y);
+}
 
-	point = (t_point*)malloc(sizeof(t_point));
-	point->x = 0;
-	point->y = 0;
-	point->z = 0;
-	point->s = 0;
-	point->z_color = 0;
-	return (point);
+
+t_mlx	*init_mlx(void)
+{
+	t_mlx	*mlx;
+
+	mlx = (t_mlx *)malloc(sizeof(t_mlx));
+	mlx->mlx = mlx_init();
+	mlx->window = mlx_new_window(mlx->mlx, WINDOW_SIZE_X, WINDOW_SIZE_Y, "FDF");
+	return (mlx);
 }

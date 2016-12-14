@@ -49,5 +49,6 @@ void			ft_console_log_clear(void);
 int				ft_match(char *s1, char *s2);
 int				ft_nmatch(char *s1, char *s2);
 double			ft_sqrt(double nb);
+double			ft_positive(double x);
 
 #endif

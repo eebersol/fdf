@@ -12,15 +12,32 @@
 
 #include <fdf.h>
 
+
+static void	run_fdf(t_mlx *mlx, t_env *env)
+{
+	t_data		data;
+
+	data.mlx = mlx;
+	data.env = env;
+	mlx_loop(mlx->mlx);
+}
+
 int main(int ac, char **av)
 {
-	(void)ac;
-	(void)av;
+	t_env *env;
+	t_mlx *mlx;
+
 	if (ac == 2)
 	{
 		init_env();
-		parse_map(av[1]);
-		print_map();
+		env = recover_env();
+		env->file_name = av[1];
+		read_file();
+		parse();
+		mlx = init_mlx();;
+		draw_vertical_lines(mlx, env);
+		draw_horizontal_lines(mlx, env);
+		run_fdf(mlx, env);
 		return (0);
 	}
 	else
