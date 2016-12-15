@@ -19,13 +19,6 @@ t_env		*recover_env(void)
 	return (&env);
 }
 
-t_mlx		*recover_mlx(void)
-{
-	static 	t_mlx 	mlx;
-
-	return (&mlx);
-}
-
 void		init_env(void)
 {
 	t_env		*env;
@@ -38,6 +31,7 @@ void		init_env(void)
 	env->width = 0;
 	env->depth = 4;
 	env->view.x = 20;
+	env->color = GRN;
 	env->view.y = 10;
 	env->fd = 0;
 	env->list = NULL;

@@ -14,7 +14,7 @@
 NAME		=	fdf
 LIB			=	./libft/libft.a
 _SRC		=	main.c\
-				get_info.c\
+				get_parse_info.c\
 				display.c\
 				init.c\
 
