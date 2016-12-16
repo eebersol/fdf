@@ -25,8 +25,12 @@ void		init_env(void)
 
 	env = (t_env*)malloc(sizeof(t_env));
 	env = recover_env();
+	env->tab_width = NULL;
 	env->coord = NULL;
 	env->height_tile = NULL;
+	env->colore = NULL;
+	env->list = NULL;
+	env->error = 0;
 	env->height = 0;
 	env->width = 0;
 	env->depth = 4;
@@ -34,13 +38,10 @@ void		init_env(void)
 	env->view.y = 10;
 	env->rot.x = 0;
 	env->rot.y = 0;
-	env->colore = NULL;
 	env->fd = 0;
-	env->list = NULL;
 }
 
-
-void	init_delta(t_delta *delta, t_point start, t_point end)
+void		init_delta(t_delta *delta, t_point start, t_point end)
 {
 	delta->x = end.x - start.x;
 	delta->y = end.y - start.y;
@@ -48,8 +49,7 @@ void	init_delta(t_delta *delta, t_point start, t_point end)
 	delta->abs_y = ft_positive(delta->y);
 }
 
-
-t_mlx	*init_mlx(void)
+t_mlx		*init_mlx(void)
 {
 	t_mlx	*mlx;
 

@@ -10,7 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-# include <fdf.h>
+#include <fdf.h>
+
+void	depth(t_mlx *mlx, t_env *env, int keycode)
+{
+	env->depth += keycode == R ? 1 : -1;
+	relaod_fdf(mlx, env);
+}
+
+void	zoom(t_mlx *mlx, t_env *env, int keycode)
+{
+	env->view.x += keycode == Y ? 2 : -2;
+	env->view.y = env->view.x / 2;
+	relaod_fdf(mlx, env);
+}
 
 void	normal_mod(t_mlx *mlx, t_env *env, int keycode)
 {
@@ -25,32 +38,20 @@ void	normal_mod(t_mlx *mlx, t_env *env, int keycode)
 	relaod_fdf(mlx, env);
 }
 
-void 	rot(t_mlx *mlx, t_env *env, int keycode)
+void	rot(t_mlx *mlx, t_env *env, int keycode)
 {
-	if (keycode == Q)
-	{
-		env->rot.x += 10;
-	}
-	else
-		env->rot.x -= 10;
+	env->view.x += keycode == Q ? 10 : -10;
 	relaod_fdf(mlx, env);
 }
 
 void	l_r_up_down(t_mlx *mlx, t_env *env, int keycode)
 {
-	if (keycode == D)
-		env->rot.x += 10;
-	else if (keycode == A)
-		env->rot.x -= 10;
-	else if (keycode == W)
+	if (keycode == D || keycode == A)
+		env->rot.x += keycode == D ? 10 : -10;	
+	else if (keycode == S || keycode == W)
 	{
-		env->rot.x -= 10;
-		env->rot.y -= 10;
-	}
-	else if (keycode == S)
-	{
-		env->rot.x += 10;
-		env->rot.y += 10;		
+		env->rot.x += keycode == S ? 10 : -10;
+		env->rot.y += keycode == S ? 10 : -10;	
 	}
 	relaod_fdf(mlx, env);
 }

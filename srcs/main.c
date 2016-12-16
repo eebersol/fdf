@@ -12,7 +12,7 @@
 
 #include <fdf.h>
 
-int main(int ac, char **av)
+int		main(int ac, char **av)
 {
 	t_env *env;
 	t_mlx *mlx;
@@ -23,7 +23,11 @@ int main(int ac, char **av)
 		env = recover_env();
 		env->file_name = av[1];
 		read_file(env);
+		printf("2\n");
 		parse(env);
+		printf("3\n");
+		if (env->error == 1)
+			exit(0);
 		mlx = init_mlx();
 		print_vertical_lines(mlx, env);
 		print_horizontal_lines(mlx, env);

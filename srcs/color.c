@@ -12,13 +12,14 @@
 
 #include <fdf.h>
 
+#0C9D40
+#1DA742
+#2FB244
+#41BD46
+#64D34A
+#76DE4C
+#76DE4C
 
-
-// static unsigned long translate_RGB_HEX(int r, int g, int b)
-// {   
-// 	printf("[%d][%d][%d]\n", r, g, b);
-//     return ((r & 0xff) << 16) | ((g & 0xff) << 8) | (b & 0xff);
-// }
 
 unsigned int 	pick_color(int i)
 {

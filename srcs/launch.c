@@ -12,33 +12,7 @@
 
 #include <fdf.h>
 
-static void	depth(t_mlx *mlx, t_env *env, int keycode)
-{
-	if (keycode == R == 1)
-		env->depth += 1;
-	else
-		env->depth -= 1;
-	relaod_fdf(mlx, env);
-}
-
-static void	zoom(t_mlx *mlx, t_env *env, int keycode)
-{
-
-	if (keycode == Y)
-	{
-		env->view.x += 2;
-		env->view.y = env->view.x/2;
-	}
-	else
-	{
-		env->view.x -= 2;
-		env->view.y = env->view.x/2;
-	}
-	relaod_fdf(mlx, env);
-}
-
-
-static int	key_hooks(int keycode, t_data *data)
+int		key_hooks(int keycode, t_data *data)
 {
 	if (keycode == ESC)
 		exit(0);
@@ -55,7 +29,7 @@ static int	key_hooks(int keycode, t_data *data)
 	return (0);
 }
 
-void relaod_fdf(t_mlx *mlx, t_env *env)
+void	relaod_fdf(t_mlx *mlx, t_env *env)
 {
 	mlx_clear_window(mlx->mlx, mlx->window);
 	parse(env);
