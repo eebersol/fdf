@@ -18,19 +18,16 @@ void	parse(t_env *env)
 	int			y;
 
 	env->coord = (t_point**)malloc(sizeof(t_point*) * env->height);
-	env->colore = (unsigned int**)malloc(sizeof(unsigned int) * env->height);
 	y = -1;
 	while (++y < env->height)
 	{
 		env->coord[y] = (t_point*)malloc(sizeof(t_point) * env->width);
-		env->colore[y] = (unsigned int *)malloc(sizeof(unsigned int) * env->width);
 		x = -1;
 		while (++x < env->width)
 		{
-			env->coord[y][x].x = (x - y) * env->view.x + PADDING_X;
+			env->coord[y][x].x = (x - y) * env->view.x + PADDING_X + env->rot.x;
 			env->coord[y][x].y = (x + y) * env->view.y + PADDING_Y
-						- (env->height_tile[y][x] * (int)env->depth);
-			env->colore[y][x] = pick_color(23 * env->height_tile[y][x]);
+						- (env->height_tile[y][x] * (int)env->depth) + env->rot.x;
 		}
 	}
 }
@@ -57,7 +54,10 @@ void	read_file(t_env *env)
 	int		j;
 
 	if (!(env->fd = open(env->file_name, O_RDONLY)))
+	{
 		ft_putendl_fd("Error occured can't open map.", 2);
+		exit(0);
+	}
 	get_width_height_map(env);
 	env->height_tile = (int **)malloc(sizeof(int*) * env->height);
 	i = -1;

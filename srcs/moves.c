@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   moves.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eebersol <eebersol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,26 +10,47 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <fdf.h>
+# include <fdf.h>
 
-int main(int ac, char **av)
+void	normal_mod(t_mlx *mlx, t_env *env, int keycode)
 {
-	t_env *env;
-	t_mlx *mlx;
-
-	if (ac == 2)
+	if (keycode == TAB)
 	{
-		init_env();
-		env = recover_env();
-		env->file_name = av[1];
-		read_file(env);
-		parse(env);
-		mlx = init_mlx();
-		print_vertical_lines(mlx, env);
-		print_horizontal_lines(mlx, env);
-		launch_fdf(mlx, env);
-		return (0);
+		env->rot.y = 0;
+		env->rot.x = 0;
+		env->view.x = 20;
+		env->view.y = 10;
+		env->depth = 4;
+	}
+	relaod_fdf(mlx, env);
+}
+
+void 	rot(t_mlx *mlx, t_env *env, int keycode)
+{
+	if (keycode == Q)
+	{
+		env->rot.x += 10;
 	}
 	else
-		ft_putendl_fd("Invalid number of argument", 2);
+		env->rot.x -= 10;
+	relaod_fdf(mlx, env);
+}
+
+void	l_r_up_down(t_mlx *mlx, t_env *env, int keycode)
+{
+	if (keycode == D)
+		env->rot.x += 10;
+	else if (keycode == A)
+		env->rot.x -= 10;
+	else if (keycode == W)
+	{
+		env->rot.x -= 10;
+		env->rot.y -= 10;
+	}
+	else if (keycode == S)
+	{
+		env->rot.x += 10;
+		env->rot.y += 10;		
+	}
+	relaod_fdf(mlx, env);
 }

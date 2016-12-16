@@ -17,6 +17,7 @@ _SRC		=	main.c\
 				get_parse_info.c\
 				display.c\
 				init.c\
+				moves.c\
 				color.c\
 				launch.c\
 

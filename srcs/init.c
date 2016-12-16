@@ -31,8 +31,10 @@ void		init_env(void)
 	env->width = 0;
 	env->depth = 4;
 	env->view.x = 20;
-	env->colore = NULL;
 	env->view.y = 10;
+	env->rot.x = 0;
+	env->rot.y = 0;
+	env->colore = NULL;
 	env->fd = 0;
 	env->list = NULL;
 }

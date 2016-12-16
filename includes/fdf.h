@@ -32,9 +32,21 @@
 #define A				0
 #define S				1
 #define D 				2
-#define F				4
+#define F				3
 #define G				5
-#define H 				6
+#define H 				4
+#define	Q 				12
+#define E 				14
+#define C 				8
+#define Z	 			6
+#define TAB 			48
+#define W 				13
+#define R 				15
+#define F 				3
+#define T 				17
+#define Y 				16
+#define H 				4
+#define G   			5
 
 
 typedef struct s_point
@@ -50,8 +62,9 @@ typedef struct		s_env
 	int				height;
 	int 			width;
 	int				depth;
-	unsigned int 			**colore;
+	unsigned int 	**colore;
 	t_point 		view;
+	t_point 		rot;
 	t_point 		**point;
 	t_point			**coord;
 	t_list 			*list;
@@ -89,9 +102,9 @@ void		init_delta(t_delta *delta, t_point start, t_point end);
 /*
 // display.c
 */
-void		print_x(t_delta delta, t_mlx *mlx, double posx, double pos, unsigned int color);
-void		print_y(t_delta delta, t_mlx *mlx, double posx, double posy, unsigned int color);
-void		print_line(t_mlx *mlx, t_point start, t_point end, unsigned int color);
+void		print_x(t_delta delta, t_mlx *mlx, double posx, double pos);
+void		print_y(t_delta delta, t_mlx *mlx, double posx, double posy);
+void		print_line(t_mlx *mlx, t_point start, t_point end);
 void		print_horizontal_lines(t_mlx *mlx, t_env *env);
 void		print_vertical_lines(t_mlx *mlx, t_env *env);
 
@@ -106,5 +119,8 @@ void		read_file(t_env *env);
 
 void	launch_fdf(t_mlx *mlx, t_env *env);
 unsigned int	pick_color(int i);
-
+void	l_r_up_down(t_mlx *mlx, t_env *env, int keycode);
+void	normal_mod(t_mlx *mlx, t_env *env, int keycode);
+void relaod_fdf(t_mlx *mlx, t_env *env);
+void 	rot(t_mlx *mlx, t_env *env, int keycode);
 #endif

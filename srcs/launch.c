@@ -12,67 +12,55 @@
 
 #include <fdf.h>
 
-static 	void relaod_fdf(t_mlx *mlx, t_env *env)
+static void	depth(t_mlx *mlx, t_env *env, int keycode)
 {
-	mlx_clear_window(mlx->mlx, mlx->window);
-	parse(env);
-	print_vertical_lines(mlx, env);
-	print_horizontal_lines(mlx, env);
-}
-
-
-static void	depth(t_mlx *mlx, t_env *env, int i)
-{
-	if (i == 0)
-		env->depth = 4;
-	else if (i == 1)
+	if (keycode == R == 1)
 		env->depth += 1;
 	else
 		env->depth -= 1;
 	relaod_fdf(mlx, env);
 }
 
-static void	zoom(t_mlx *mlx, t_env *env, int i)
+static void	zoom(t_mlx *mlx, t_env *env, int keycode)
 {
-	if (i == 0)
+
+	if (keycode == Y)
 	{
-		env->view.x = 20;
-		env->view.y = 10;
-	}
-	else if (i == 1)
-	{
-		env->view.x += 1;
-		env->view.y += 0.5;
+		env->view.x += 2;
+		env->view.y = env->view.x/2;
 	}
 	else
 	{
-		env->view.x -= 1;
-		env->view.y -= 0.5;
+		env->view.x -= 2;
+		env->view.y = env->view.x/2;
 	}
 	relaod_fdf(mlx, env);
 }
 
 
-static int		key_hooks(int keycode, t_data *data)
+static int	key_hooks(int keycode, t_data *data)
 {
 	if (keycode == ESC)
 		exit(0);
-	else if (keycode == S)
-		zoom(data->mlx, data->env, 1);
-	else if (keycode == A)
-		zoom(data->mlx, data->env, 2);
-	else if (keycode == D)
-		zoom(data->mlx, data->env, 0);
-	else if (keycode == F)
-		depth(data->mlx, data->env, 1);
-	else if (keycode == G)
-		depth(data->mlx, data->env, 2);
-	else if (keycode == H)
-	{
-		printf("ICIhhhh\n");
-		depth(data->mlx, data->env, 0);
-	}
+	else if (keycode == W || keycode == A || keycode == S || keycode == D)
+		l_r_up_down(data->mlx, data->env, keycode);
+	else if (keycode == R || keycode == F)
+		depth(data->mlx, data->env, keycode);
+	else if (keycode == Y || keycode == H)
+		zoom(data->mlx, data->env, keycode);
+	else if (keycode == Q || keycode == E)
+		rot(data->mlx, data->env, keycode);
+	else if (keycode == TAB)
+		normal_mod(data->mlx, data->env, keycode);
 	return (0);
+}
+
+void relaod_fdf(t_mlx *mlx, t_env *env)
+{
+	mlx_clear_window(mlx->mlx, mlx->window);
+	parse(env);
+	print_vertical_lines(mlx, env);
+	print_horizontal_lines(mlx, env);
 }
 
 void	launch_fdf(t_mlx *mlx, t_env *env)
