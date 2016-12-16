@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   get_parse_info.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eebersol <eebersol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,47 +12,29 @@
 
 #include <fdf.h>
 
-t_env		*recover_env(void)
+
+
+// static unsigned long translate_RGB_HEX(int r, int g, int b)
+// {   
+// 	printf("[%d][%d][%d]\n", r, g, b);
+//     return ((r & 0xff) << 16) | ((g & 0xff) << 8) | (b & 0xff);
+// }
+
+unsigned int 	pick_color(int i)
 {
-	static t_env	env;
+	int *begin_color;
+	int *add_color;
 
-	return (&env);
-}
-
-void		init_env(void)
-{
-	t_env		*env;
-
-	env = (t_env*)malloc(sizeof(t_env));
-	env = recover_env();
-	env->coord = NULL;
-	env->height_tile = NULL;
-	env->height = 0;
-	env->width = 0;
-	env->depth = 4;
-	env->view.x = 20;
-	env->colore = NULL;
-	env->view.y = 10;
-	env->fd = 0;
-	env->list = NULL;
-}
+	begin_color = (int*)malloc(sizeof(int) * 3);
+	add_color = (int*)malloc(sizeof(int) * 3);
+	begin_color[0] = 51;
+	begin_color[1] = 255;
+	begin_color[2] = 0;
+	add_color[0] = 51;
+	add_color[1] = 255 - i;
+	add_color[2] = 0 + i;
+	printf("%s\n", ft_itoa_base(add_color[0], 10));
+	return (0);
 
 
-void	init_delta(t_delta *delta, t_point start, t_point end)
-{
-	delta->x = end.x - start.x;
-	delta->y = end.y - start.y;
-	delta->abs_x = ft_positive(delta->x);
-	delta->abs_y = ft_positive(delta->y);
-}
-
-
-t_mlx	*init_mlx(void)
-{
-	t_mlx	*mlx;
-
-	mlx = (t_mlx *)malloc(sizeof(t_mlx));
-	mlx->mlx = mlx_init();
-	mlx->window = mlx_new_window(mlx->mlx, WINDOW_SIZE_X, WINDOW_SIZE_Y, "FDF");
-	return (mlx);
 }

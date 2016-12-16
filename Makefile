@@ -17,6 +17,8 @@ _SRC		=	main.c\
 				get_parse_info.c\
 				display.c\
 				init.c\
+				color.c\
+				launch.c\
 
 INC			=	./includes/fdf.h \
 

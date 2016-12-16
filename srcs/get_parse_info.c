@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_parse_info.c                                         :+:      :+:    :+:   */
+/*   get_parse_info.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: eebersol <eebersol@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -18,16 +18,19 @@ void	parse(t_env *env)
 	int			y;
 
 	env->coord = (t_point**)malloc(sizeof(t_point*) * env->height);
+	env->colore = (unsigned int**)malloc(sizeof(unsigned int) * env->height);
 	y = -1;
 	while (++y < env->height)
 	{
 		env->coord[y] = (t_point*)malloc(sizeof(t_point) * env->width);
+		env->colore[y] = (unsigned int *)malloc(sizeof(unsigned int) * env->width);
 		x = -1;
 		while (++x < env->width)
 		{
 			env->coord[y][x].x = (x - y) * env->view.x + PADDING_X;
 			env->coord[y][x].y = (x + y) * env->view.y + PADDING_Y
 						- (env->height_tile[y][x] * (int)env->depth);
+			env->colore[y][x] = pick_color(23 * env->height_tile[y][x]);
 		}
 	}
 }

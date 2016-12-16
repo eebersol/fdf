@@ -27,7 +27,8 @@ int main(int ac, char **av)
 		mlx = init_mlx();;
 		print_vertical_lines(mlx, env);
 		print_horizontal_lines(mlx, env);
-		mlx_loop(mlx->mlx);
+		launch_fdf(mlx, env);
+		// mlx_loop(mlx->mlx);
 		return (0);
 	}
 	else

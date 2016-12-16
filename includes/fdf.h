@@ -28,6 +28,14 @@
 #define WINDOW_SIZE_Y	1080
 #define RD				0xEC354C
 #define GRN			    0x25FF50
+#define ESC 			123
+#define A				0
+#define S				1
+#define D 				2
+#define F				4
+#define G				5
+#define H 				6
+
 
 typedef struct s_point
 {
@@ -42,7 +50,7 @@ typedef struct		s_env
 	int				height;
 	int 			width;
 	int				depth;
-	int 			color;
+	unsigned int 			**colore;
 	t_point 		view;
 	t_point 		**point;
 	t_point			**coord;
@@ -66,6 +74,11 @@ typedef struct	s_delta
 	int		abs_y;
 }				t_delta;
 
+typedef struct s_data
+{
+	t_env *env;
+	t_mlx *mlx;
+}				t_data;
 /*
 // init
 */
@@ -73,15 +86,12 @@ t_env		*recover_env(void);
 t_mlx		*init_mlx(void);
 void		init_env(void);
 void		init_delta(t_delta *delta, t_point start, t_point end);
-
-
 /*
 // display.c
 */
-
-void		print_x(t_delta delta, t_mlx *mlx, double posx, double pos);
-void		print_y(t_delta delta, t_mlx *mlx, double posx, double posy);
-void		print_line(t_mlx *mlx, t_point start, t_point end);
+void		print_x(t_delta delta, t_mlx *mlx, double posx, double pos, unsigned int color);
+void		print_y(t_delta delta, t_mlx *mlx, double posx, double posy, unsigned int color);
+void		print_line(t_mlx *mlx, t_point start, t_point end, unsigned int color);
 void		print_horizontal_lines(t_mlx *mlx, t_env *env);
 void		print_vertical_lines(t_mlx *mlx, t_env *env);
 
@@ -91,5 +101,10 @@ void		print_vertical_lines(t_mlx *mlx, t_env *env);
 void		parse(t_env *env);
 void		get_width_height_map(t_env *env);
 void		read_file(t_env *env);
+
+//
+
+void	launch_fdf(t_mlx *mlx, t_env *env);
+unsigned int	pick_color(int i);
 
 #endif
