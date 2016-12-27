@@ -18,7 +18,6 @@ _SRC		=	main.c\
 				display.c\
 				init.c\
 				moves.c\
-				color.c\
 				launch.c\
 
 INC			=	./includes/fdf.h \

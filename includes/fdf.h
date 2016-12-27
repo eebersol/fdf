@@ -58,11 +58,13 @@ typedef struct s_point
 typedef struct		s_env
 {
 	char 			*file_name;
+	int 			*tab_width;
 	int 			fd;
 	int				height;
 	int 			width;
 	int				depth;
 	unsigned int 	**colore;
+	int 			error;
 	t_point 		view;
 	t_point 		rot;
 	t_point 		**point;
@@ -117,10 +119,11 @@ void		read_file(t_env *env);
 
 //
 
-void	launch_fdf(t_mlx *mlx, t_env *env);
-unsigned int	pick_color(int i);
-void	l_r_up_down(t_mlx *mlx, t_env *env, int keycode);
-void	normal_mod(t_mlx *mlx, t_env *env, int keycode);
-void relaod_fdf(t_mlx *mlx, t_env *env);
-void 	rot(t_mlx *mlx, t_env *env, int keycode);
+void		launch_fdf(t_mlx *mlx, t_env *env);
+void		l_r_up_down(t_mlx *mlx, t_env *env, int keycode);
+void		normal_mod(t_mlx *mlx, t_env *env, int keycode);
+void 		relaod_fdf(t_mlx *mlx, t_env *env);
+void 		rot(t_mlx *mlx, t_env *env, int keycode);
+void		depth(t_mlx *mlx, t_env *env, int keycode);
+void		zoom(t_mlx *mlx, t_env *env, int keycode);
 #endif
