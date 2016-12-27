@@ -28,7 +28,6 @@ void		init_env(void)
 	env->tab_width = NULL;
 	env->coord = NULL;
 	env->height_tile = NULL;
-	env->colore = NULL;
 	env->list = NULL;
 	env->error = 0;
 	env->height = 0;

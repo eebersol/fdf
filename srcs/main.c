@@ -18,7 +18,7 @@ static 	void display_control(void)
 	ft_putendl_fd("# # # # # # # # # # # # # # # #", 1);
 	ft_putendl_fd("#           Control :         #", 1);
 	ft_putendl_fd("#-----------------------------#", 1);
-	ft_putendl_fd("# tab : reset default config. #", 1);
+	ft_putendl_fd("# TAB : reset default config. #", 1);
 	ft_putendl_fd("#  Q  : increase width map.   #", 1);
 	ft_putendl_fd("#  E  : ecrease width map.    #", 1);
 	ft_putendl_fd("#  W  : move up map.          #", 1);
